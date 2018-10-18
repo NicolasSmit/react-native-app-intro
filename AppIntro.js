@@ -206,18 +206,12 @@ export default class AppIntro extends Component {
     }
     return (
       <View style={[this.styles.paginationContainer]}>
-        {this.props.showSkipButton ? <SkipButton
-          {...this.props}
-          {...this.state}
-          isSkipBtnShow={isSkipBtnShow}
-          styles={this.styles}
-          onSkipBtnClick={() => this.props.onSkipBtnClick(index)} /> :
-          <View style={this.styles.btnContainer} />
-        }
+        <View style={[this.styles.dotContainer]}>
         {this.props.showDots && RenderDots(index, total, {
           ...this.props,
           styles: this.styles
         })}
+        </View>
         {this.props.showDoneButton ? <DoneButton
             {...this.props}
             {...this.state}
@@ -311,7 +305,8 @@ export default class AppIntro extends Component {
     if (pageArray.length > 0) {
       pages = pageArray.map((page, i) => this.renderBasicSlidePage(i, page));
     } else {
-      if (Platform.OS === 'ios') {
+      pages = childrens.map((children, i) => this.renderChild(children, i, i));
+      /*if (Platform.OS === 'ios') {
         pages = childrens.map((children, i) => this.renderChild(children, i, i));
       } else {
         androidPages = childrens.map((children, i) => {
@@ -331,7 +326,7 @@ export default class AppIntro extends Component {
             </Animated.View>
           );
         });
-      }
+      }*/
     }
 
     if (this.isToTintStatusBar()) {
